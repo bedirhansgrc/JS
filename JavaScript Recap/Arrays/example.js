@@ -36,6 +36,6 @@ console.log("3. ogrencinin yaşı: " , ogr3yas)
 let ort1 = (ogr1[3][0] + ogr1[3][1] + ogr1[3][2]) / 3
 let ort2 = (ogr2[3][0] + ogr2[3][1] + ogr2[3][2]) / 3
 let ort3 = (ogr3[3][0] + ogr3[3][1] + ogr3[3][2]) / 3
-console.log("1.ogrencinn not ortalaması : " ,ort1)
-console.log("2.ogrencinn not ortalaması : " ,ort2)
-console.log("3.ogrencinn not ortalaması : " ,ort3)
+console.log("1.ogrencinn not ortalaması : " ,ort1.toFixed(1))
+console.log("2.ogrencinn not ortalaması : " ,ort2.toFixed(1))
+console.log("3.ogrencinn not ortalaması : " ,ort3.toFixed(1))
