@@ -19,6 +19,6 @@ console.log(sorgu2)
 
 yenikursAdi = kursAdi.replaceAll(" ", "-").toLowerCase()
 
-merge = url + yenikursAdi
+merge = `${url}${yenikursAdi}`
 
 console.log(merge);
