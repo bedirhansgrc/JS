@@ -122,10 +122,11 @@
             });
           } else {
             //guncelleme
-            for (let gorev of gorevListesi){
-                if(gorev.id == editId){
-                    gorev.gorevAdi = taskInput.value
-                }
+            for (let gorev of gorevListesi) {
+              if (gorev.id == editId) {
+                gorev.gorevAdi = taskInput.value;
+              }
+              isEditTask = false;
             }
           }
 
@@ -150,9 +151,9 @@
       function editTask(taskId, taskName) {
         editId = taskId;
         isEditTask = true;
-        taskInput.value = taskName
-        taskInput.focus()
-        taskInput.classList.add("active")
+        taskInput.value = taskName;
+        taskInput.focus();
+        taskInput.classList.add("active");
       }
     </script>
   </body>
