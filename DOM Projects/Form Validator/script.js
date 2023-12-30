@@ -36,9 +36,28 @@ function checkRequired(inputs){
     })
     }
 
+ function checkLength(input,min,max){
+    if(input.value.length < min){
+        error(input, `${input.id} Minimum ${min} karakterli olmalıdır`)
+    }else if (input.value.length > max){
+        error(input, `${input.id} Maksimum ${max} karakterli olmalıdır`)
+    }else{
+        success(input)
+    }
+ }
+
+function checkPasswords(input1,input2){
+    if(input1.value !== input2.value){
+        error(input2, 'Parolalar eşleşmiyor')
+    }
+}
+
 form.addEventListener("submit", function (e) {
     e.preventDefault()
 
     checkRequired([username,email,password,repassword])
     checkEmail(email)
+    checkLength(username,7,15)
+    checkLength(password,8,12)
+    checkPasswords(password,repassword)
 })
