@@ -2,6 +2,9 @@ const display = document.querySelector(".calculator-input")
 const keys = document.querySelector(".calculator-keys")
 
 let displayValue = "0"
+let firstValue = null
+let operator = null
+let waitingForSecondValue = false
 
 updateDisplay()
 
@@ -15,6 +18,8 @@ keys.addEventListener("click", function (e) {
     if (!element.matches("button")) return
 
     if (element.classList.contains("operator")) {
+        handleOperator(element.value)
+        updateDisplay()
         console.log('operator', element.value)
         return
     }
@@ -32,21 +37,56 @@ keys.addEventListener("click", function (e) {
         console.log('clear', element.value)
         return
     }
-
-    // console.log('number' ,element.value)
     inputNumber(element.value);
     updateDisplay()
 })
 
-function inputNumber(num){
-    displayValue =displayValue === '0' ? num: displayValue + num
+function handleOperator(nextoperator) {
+    const value = parseFloat(displayValue)
+
+    if(operator && waitingForSecondValue){
+        operator = nextoperator
+        return
+    }
+
+    if (firstValue == null) {
+        firstValue = value
+    }else if(operator){
+        const result = calculate(firstValue,value,operator)
+        displayValue=String(result)
+        firstValue=result
+    }
+
+    waitingForSecondValue = true
+    operator = nextoperator
 }
 
-function inputDecimal(){
-    if(!displayValue.includes('.'))
-    displayValue += '.'
+function calculate(first,second,operator){
+    if(operator === '+'){
+    return first + second
+    }else if (operator === '-'){
+        return first - second
+    }else if( operator === '*'){
+        return first * second
+    }else if (operator === '/'){
+        return first / second
+    }
+    return second
+}
+function inputNumber(num) {
+    if (waitingForSecondValue) {
+        displayValue = num
+        waitingForSecondValue = false
+    } else {
+        displayValue = displayValue === '0' ? num : displayValue + num
+    }
 }
 
-function clear (){
+function inputDecimal() {
+    if (!displayValue.includes('.'))
+        displayValue += '.'
+}
+
+function clear() {
     displayValue = "0"
 }
