@@ -1,8 +1,8 @@
 const word_el = document.getElementById('word')
-
-const correctLetters =['j','a']
+const popup = document.getElementById('popup-container')
+const message_el = document.getElementById("success-message")
+const correctLetters =['j','a','v']
 const wrongLetters = []
-
 
 function getRandomWord(){
     const words = ["javascript", "java", "phyton"]
@@ -24,7 +24,12 @@ function displayWord(){
 
     const w =word_el.innerText.replace(/\n/g, '')
     if(w == selectedWord){
-        console.log("bildiniz")
+        popup.style.display = 'flex'
+        message_el.innerText = "Tebrikler Kazandıız"
     }
 }
+window.addEventListener("keydown" , function(e){
+    console.log(e.key)
+    console.log(e.keycode)
+})
 displayWord()
