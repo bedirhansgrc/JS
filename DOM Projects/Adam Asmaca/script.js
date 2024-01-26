@@ -3,11 +3,11 @@ const popup = document.getElementById('popup-container')
 const message_el = document.getElementById("success-message")
 const correctLetters = []
 const wrongLetters = []
-const selectedWord = getRandomWord()
+let selectedWord = getRandomWord()
 const wrongLetters_el = document.getElementById("wrong-letters")
 const items = document.querySelectorAll(".item")
 const message = document.getElementById('message')
-const PlayAgainbtn = document.getElementById('play-again')
+const PlayAgainBtn = document.getElementById('play-again')
 
 
 function getRandomWord() {
@@ -63,10 +63,15 @@ function displayMessage() {
     }, 2000)
 }
 
-PlayAgainbtn.addEventListener("click", function () {
+PlayAgainBtn.addEventListener('click', function () {
     correctLetters.splice(0)
     wrongLetters.splice(0)
+
     selectedWord = getRandomWord()
+
+    displayWord()
+    updateWrongLetters()
+    popup.style.display = 'none'
 
 })
 
