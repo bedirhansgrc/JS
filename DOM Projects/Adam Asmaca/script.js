@@ -4,6 +4,8 @@ const message_el = document.getElementById("success-message")
 const correctLetters = []
 const wrongLetters = []
 const selectedWord = getRandomWord()
+const wrongLetters_el = document.getElementById("wrong-letters")
+const items = document.querySelectorAll(".item")
 
 function getRandomWord() {
     const words = ["javascript", "java", "phyton"]
@@ -28,6 +30,25 @@ function displayWord() {
         message_el.innerText = "Tebrikler Kazandıız"
     }
 }
+
+function updateWrongLetters() {
+    wrongLetters_el.innerHTML = `
+    ${wrongLetters.length>0? '<h3> Hatalı Harfler</h3>' : ''}
+    ${wrongLetters.map(letter => `<span>${letter}<span>`)}
+    `
+
+    items.forEach((item,index) => {
+        const errorCount = wrongLetters.length
+
+        if(index<errorCount){
+            item.style.display = 'block'
+        }else{
+            item.style.display = 'none'
+        }
+    })
+}
+
+
 window.addEventListener("keydown", function (e) {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
         const letter = e.key
@@ -42,7 +63,7 @@ window.addEventListener("keydown", function (e) {
         } else {
             if (!wrongLetters.includes(letter)) {
                 wrongLetters.push(letter)
-                console.log("hatalı harfleri güncelle.") 
+                updateWrongLetters()
             }
         }
     }
