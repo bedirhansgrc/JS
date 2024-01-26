@@ -6,6 +6,9 @@ const wrongLetters = []
 const selectedWord = getRandomWord()
 const wrongLetters_el = document.getElementById("wrong-letters")
 const items = document.querySelectorAll(".item")
+const message = document.getElementById('message')
+const PlayAgainbtn = document.getElementById('play-again')
+
 
 function getRandomWord() {
     const words = ["javascript", "java", "phyton"]
@@ -33,21 +36,39 @@ function displayWord() {
 
 function updateWrongLetters() {
     wrongLetters_el.innerHTML = `
-    ${wrongLetters.length>0? '<h3> Hatalı Harfler</h3>' : ''}
+    ${wrongLetters.length > 0 ? '<h3> Hatalı Harfler</h3>' : ''}
     ${wrongLetters.map(letter => `<span>${letter}<span>`)}
     `
 
-    items.forEach((item,index) => {
+    items.forEach((item, index) => {
         const errorCount = wrongLetters.length
 
-        if(index<errorCount){
+        if (index < errorCount) {
             item.style.display = 'block'
-        }else{
+        } else {
             item.style.display = 'none'
         }
     })
+    if (wrongLetters.length === items.length) {
+        popup.style.display = 'flex'
+        message_el.innerText = "Kaybettin Ezik"
+    }
 }
 
+function displayMessage() {
+    message.classList.add('show')
+
+    setTimeout(function () {
+        message.classList.remove('show')
+    }, 2000)
+}
+
+PlayAgainbtn.addEventListener("click", function () {
+    correctLetters.splice(0)
+    wrongLetters.splice(0)
+    selectedWord = getRandomWord()
+
+})
 
 window.addEventListener("keydown", function (e) {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
@@ -58,12 +79,16 @@ window.addEventListener("keydown", function (e) {
                 correctLetters.push(letter)
                 displayWord()
             } else {
-                console.log("bu harfi zaten eklediniz")
+                displayMessage()
+                message.classList.add("show")
             }
         } else {
             if (!wrongLetters.includes(letter)) {
                 wrongLetters.push(letter)
                 updateWrongLetters()
+            }
+            else {
+                displayMessage()
             }
         }
     }
