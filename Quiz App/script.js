@@ -34,9 +34,10 @@ function Soru(soruMetni, cevapSecenekleri, dogrucevap) {
     this.soruMetni = soruMetni
     this.cevapSecenekleri = cevapSecenekleri
     this.dogrucevap = dogrucevap
-    this.cevabiKontrolEt = function(cevap){
-        return cevap === this.dogrucevap
-    }
+    console.log(this)
+}
+Soru.prototype.cevabiKontrolEt = function(cevap){
+    return cevap === this.dogrucevap
 }
 let soru1 = new Soru("Hangisi javascript paket yönetim uygulamasıdır ?", { a: "Node.js", b: "TypeScript", c: "Npm" }, "c")
 let soru2 = new Soru("Hangisi .net paket yönetim uygulamasıdır ?", {a: "Node.js",b: "nuget",c: "Npm"}, "b")
@@ -49,16 +50,4 @@ let sorular = [
     new Soru("Hangisi javascript paket yönetim uygulamasıdır ?", { a: "Node.js", b: "TypeScript", c: "Npm" }, "c")
 ]
 
-console.log(sorular[0].soruMetni)
-
-for(let s of sorular){
-    console.log(s.soruMetni)
-}
-
-console.log(soru1.soruMetni)
-console.log(soru1.dogrucevap)
 console.log(soru1.cevabiKontrolEt("c"))
-
-console.log(soru2.soruMetni)
-console.log(soru2.dogrucevap)
-console.log(soru2.cevabiKontrolEt("b"))
