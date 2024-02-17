@@ -38,8 +38,6 @@ function Soru(soruMetni, cevapSecenekleri, dogrucevap) {
 Soru.prototype.cevabiKontrolEt = function (cevap) {
     return cevap === this.dogrucevap
 }
-let soru1 = new Soru("Hangisi javascript paket yönetim uygulamasıdır ?", { a: "Node.js", b: "TypeScript", c: "Npm" }, "c")
-let soru2 = new Soru("Hangisi .net paket yönetim uygulamasıdır ?", { a: "Node.js", b: "nuget", c: "Npm" }, "b")
 
 let sorular = [
     new Soru("1-Hangisi js paket yönetim uygulamasıdır ?", { a: "Node.js", b: "TypeScript", c: "Npm" }, "c"),
