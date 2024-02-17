@@ -1,27 +1,24 @@
 const quiz = new Quiz(sorular)
+const ui = new  UI()
 
-document.querySelector(".btn_start").addEventListener("click", function () {
-    document.querySelector(".quiz_box").classList.add("active")
+ui.btn_start.addEventListener("click", function () {
+    ui.quiz_box.classList.add("active")
     soruGoster(quiz.soruGetir())
     soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length)
-    document.querySelector(".next_btn").classList.remove("show");
+    ui.btn_next.classList.remove("show");
 })
 
-document.querySelector(".next_btn").addEventListener("click", function () {
+ui.btn_next.addEventListener("click", function () {
     if (quiz.sorular.length != quiz.soruIndex + 1) {
         document.querySelector(".quiz_box").classList.add("active")
         quiz.soruIndex += 1
         soruGoster(quiz.soruGetir())
         soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length)
-        document.querySelector(".next_btn").classList.remove("show");
+        ui.btn_next.classList.remove("show");
     } else {
         console.log("quiz bitti")
     }
 })
-
-const option_list = document.querySelector(".option_list")
-const correctIcon = `<div class="icon"><i class="fas fa-check"></i></div>`
-const falseIcon = `<div class="icon"><i class="fas fa-times"></i></div>`
 
 function soruGoster(soru) {
     let question = `<span>${soru.soruMetni}</span>`
@@ -36,13 +33,10 @@ function soruGoster(soru) {
         `;
     }
 
-
-
-
     document.querySelector(".question_text").innerHTML = question
-    document.querySelector(".option_list").innerHTML = options
+    ui.option_list.innerHTML = options
 
-    const option = option_list.querySelectorAll(".option")
+    const option = ui.option_list.querySelectorAll(".option")
     for (let opt of option) {
         opt.setAttribute("onclick", "optionSelected(this)")
     }
@@ -55,17 +49,17 @@ function optionSelected(option) {
 
     if (soru.cevabiKontrolEt(cevap)) {
         option.classList.add("correct")
-        option.insertAdjacentHTML("beforeend", correctIcon)
+        option.insertAdjacentHTML("beforeend", ui.correctIcon)
     } else {
         option.classList.add("incorrect")
-        option.insertAdjacentHTML("beforeend", falseIcon)
+        option.insertAdjacentHTML("beforeend", ui.falseIcon)
     }
 
-    for (let i = 0; i < option_list.children.length; i++) {
-        option_list.children[i].classList.add("disabled")
+    for (let i = 0; i < ui.option_list.children.length; i++) {
+        ui.option_list.children[i].classList.add("disabled")
     }
 
-    document.querySelector(".next_btn").classList.add("show")
+    ui.btn_next.classList.add("show")
 }
 
 function soruSayisiniGoster(soruSirasi, toplamSoru) {
