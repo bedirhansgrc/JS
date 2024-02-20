@@ -9,7 +9,7 @@ const urunler = [
 //const tekSayilar = sayilar.filter((sayi) => sayi % 2 == 1)
 const tekSayilar = sayilar.map((sayi) => sayi % 2 == 1)
 const sonuc = urunler.filter(urun => urun.fiyat > 15000).map(urun => urun.urunAdi)
+const sonuc2 = urunler.find(urun => urun.fiyat > 12000)
+const sonuc3 = urunler.findIndex(urun => urun.fiyat > 12000)
 
-
-
-console.log(sonuc)
+console.log(sonuc3)
