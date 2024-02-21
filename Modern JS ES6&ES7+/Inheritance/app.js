@@ -26,8 +26,8 @@ class Ogrenci extends Kisi {
         return (`${this.ad} ders calisman lazım`)
     }
 
-    kendiniTanit(){
-       return `benim adım ${this.ad} okul numaram da ${this.okulNumarasi}`
+    kendiniTanit() {
+        return `benim adım ${this.ad} okul numaram da ${this.okulNumarasi}`
     }
 
 }
