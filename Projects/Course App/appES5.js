@@ -31,10 +31,25 @@ UI.prototype.clearControls = function () {
     const image = document.getElementById("image").value = ""
 }
 
-UI.prototype.deleteCourse = function(element){
-    if(element.classList.contains("delete")){
+UI.prototype.deleteCourse = function (element) {
+    if (element.classList.contains("delete")) {
         element.parentElement.parentElement.remove()
     }
+}
+
+UI.prototype.showAlert = function (message, className) {
+    var alert = `
+        <div class= "alert alert-${className}">
+            ${message}
+        </div>
+    `
+    const row = document.querySelector(".row")
+    row.insertAdjacentHTML('beforeBegin',alert)
+
+    setTimeout(()=>{
+        document.querySelector(".alert").remove()
+    },2000)
+
 }
 
 document.getElementById("new-course").addEventListener("submit", function (e) {
@@ -49,11 +64,17 @@ document.getElementById("new-course").addEventListener("submit", function (e) {
     //Crete UI
     const ui = new UI()
 
-    //add course to list
-    ui.addCourseToList(course)
+    if (title === '' || instructor === '' || image === '') {
+        ui.showAlert("Please complete the form", 'warning')
+    } else {
+        //add course to list
+        ui.addCourseToList(course)
 
-    //clear controls
-    ui.clearControls()
+        //clear controls
+        ui.clearControls()
+
+        ui.showAlert("The course has been added", 'success')
+    }
 
     e.preventDefault()
 })
@@ -61,5 +82,6 @@ document.getElementById("new-course").addEventListener("submit", function (e) {
 document.getElementById("course-list").addEventListener("click", function (e) {
     const ui = new UI()
     ui.deleteCourse(e.target)
+    ui.showAlert('The course has been deleted', 'danger')
 })
 
