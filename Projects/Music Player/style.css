@@ -1,9 +1,25 @@
+.container{
+    width: 350px;
+}
 #controls i {
     font-size: 30px;
     color: purple;
     margin-right: 20px;
 }
 #music-image{
-    width: 400px;
+    width: 100%;
     height: 200px;
+}
+#progress{
+    margin-bottom: 20px;
+}
+
+#progress .times{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#progress-bar{
+    width: 100%;
 }

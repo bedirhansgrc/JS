@@ -5,6 +5,9 @@ const singer = document.querySelector("#music-details .singer")
 const prev = document.querySelector("#controls #prev")
 const play = document.querySelector("#controls #play")
 const next = document.querySelector("#controls #next")
+const duration = document.querySelector("#duration")
+const currentTime = document.querySelector("#current-time")
+const progressBar = document.querySelector("#progress-bar")
 
 const player = new MusicPlayer(musicList)
 
@@ -41,7 +44,7 @@ function prevMusic() {
     playMusic()
 
 }
-function nextMusic(){
+function nextMusic() {
     player.next()
     let music = player.getMusic()
     displayMusic(music)
@@ -59,3 +62,18 @@ function playMusic() {
     play.classList = "fa-solid fa-pause"
     audio.play()
 }
+const calcualteTime = (toplamSaniye) => {
+    const dakika = Math.floor(toplamSaniye / 60)
+    const saniye = Math.floor(toplamSaniye % 60)
+    const guncellenenSaniye = saniye < 10 ? `0${saniye}` : `${saniye}`
+    const sonuc = `${dakika}:${guncellenenSaniye}`
+    return sonuc
+}
+audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = calcualteTime(audio.duration)
+    progressBar.max = Math.floor(audio.duration)
+})
+audio.addEventListener("timeupdate", () => {
+    progressBar.value = Math.floor(audio.currentTime)
+    currentTime.textContent = calcualteTime(progressBar.value)
+})
