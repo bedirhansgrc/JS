@@ -86,8 +86,10 @@ progressBar.addEventListener("input", () => {
 })
 let sesDurumu = "sesli"
 
-volume.addEventListener("click", () => {
-    if(sesDurumu === "sesli"){
+volumeBar.addEventListener("input", (e) => {
+    const value = e.target.value
+    audio.volume = value/100
+    if(value == 0){
         audio.muted= true
         sesDurumu = "sessiz"
         volume.classList = "fa-solid fa-volume-xmark"
@@ -95,5 +97,19 @@ volume.addEventListener("click", () => {
         audio.muted = false
         sesDurumu = "sesli"
         volume.classList = "fa-solid fa-volume-high"
+    }
+})
+
+volume.addEventListener("click", () => {
+    if(sesDurumu === "sesli"){
+        audio.muted= true
+        sesDurumu = "sessiz"
+        volume.classList = "fa-solid fa-volume-xmark"
+        volumeBar.value = 0
+    }else{
+        audio.muted = false
+        sesDurumu = "sesli"
+        volume.classList = "fa-solid fa-volume-high"
+        volumeBar.value = 100
     }
 })
